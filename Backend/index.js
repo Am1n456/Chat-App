@@ -15,7 +15,9 @@ dotenv.config();
 const port = process.env.PORT;
 const __dirname = path.resolve()
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' })); // Increase limit for JSON payload
+app.use(express.urlencoded({ limit: '50mb', extended: true })); // Increase limit for URL-encoded payloads
+
 
 app.use(cookieParser())
 
@@ -25,12 +27,6 @@ app.use(
     credentials: true,
   })
 );
-
-
-app.use(express.json({limit : "10mb"}))
-app.use(express.urlencoded({extended: true ,
-    limit:"10mb"
-}))
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);

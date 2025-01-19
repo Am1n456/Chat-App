@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useChatStore } from "../store/useChatStore";
-import { X, Image,Send } from "lucide-react";
+import { X, Image, Send } from "lucide-react";
 import toast from "react-hot-toast";
 
 function ChatInput() {
@@ -24,26 +24,26 @@ function ChatInput() {
   };
 
   const removeImage = () => {
-    setImagePreview(null)
+    setImagePreview(null);
   };
-  
-  const handleSendMessage = async (e) => {
-    e.preventDefault()
 
-    if (!text.trim() && !imagePreview) return
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+
+    if (!text.trim() && !imagePreview) return;
     try {
       await sendMessage({
-        text:text.trim(),
-        image:imagePreview,
-      })
+        text: text.trim(),
+        image: imagePreview,
+      });
 
       //clear form
 
-      setText("")
+      setText("");
       setImagePreview(null);
-      if(fileInputRef.current) fileInputRef.current.value = "";
+      if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
-      toast.error("Failed to send the message", error)
+      toast.error("Failed to send the message", error);
     }
   };
 
@@ -87,7 +87,7 @@ function ChatInput() {
 
           <button
             type="button"
-            className={`hidden sm:flex btn btn-circle
+            className={`btn btn-circle
                      ${imagePreview ? "text-emerald-500" : "text-zinc-400"}`}
             onClick={() => fileInputRef.current?.click()}
           >
